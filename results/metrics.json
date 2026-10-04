@@ -1,0 +1,61 @@
+{
+    "evaluation_timestamp": "2026-10-04 21:43:03",
+    "test_samples_count": 774,
+    "models": {
+        "multinomial_nb": {
+            "accuracy": 0.9755,
+            "precision": 1.0,
+            "recall": 0.8061,
+            "f1_score": 0.8927,
+            "train_time_seconds": 0.008,
+            "inference_time_per_sample_ms": 0.0008,
+            "confusion_matrix": [
+                [
+                    676,
+                    0
+                ],
+                [
+                    19,
+                    79
+                ]
+            ]
+        },
+        "linear_svm": {
+            "accuracy": 0.9845,
+            "precision": 0.9574,
+            "recall": 0.9184,
+            "f1_score": 0.9375,
+            "train_time_seconds": 1.3262,
+            "inference_time_per_sample_ms": 0.0487,
+            "confusion_matrix": [
+                [
+                    672,
+                    4
+                ],
+                [
+                    8,
+                    90
+                ]
+            ]
+        },
+        "random_forest": {
+            "accuracy": 0.9806,
+            "precision": 0.9882,
+            "recall": 0.8571,
+            "f1_score": 0.918,
+            "train_time_seconds": 0.5079,
+            "inference_time_per_sample_ms": 0.0636,
+            "confusion_matrix": [
+                [
+                    675,
+                    1
+                ],
+                [
+                    14,
+                    84
+                ]
+            ]
+        }
+    },
+    "best_model": "linear_svm"
+}

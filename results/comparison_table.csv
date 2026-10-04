@@ -1,0 +1,4 @@
+Model,Accuracy,Precision,Recall,F1-Score,Train Time (s),Inference Time (ms/sample)
+multinomial_nb,0.9755,1.0,0.8061,0.8927,0.008,0.0008
+linear_svm,0.9845,0.9574,0.9184,0.9375,1.3262,0.0487
+random_forest,0.9806,0.9882,0.8571,0.918,0.5079,0.0636
