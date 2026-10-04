@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Email Spam Detection System — Demo</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <div class="institution">ITS Engineering College, Greater Noida (AKTU)</div>
+            <h1>Email Spam Detection System</h1>
+            <p class="subtitle">Review-2 Project Demonstration | Machine Learning Classification</p>
+            <div class="model-badge">Active Model: <strong>{{ model_name }}</strong> (F1: {{ f1_score }})</div>
+        </header>
+
+        <main class="main-card">
+            <!-- Sample Buttons -->
+            <div class="sample-section">
+                <span class="sample-label">Quick Test Samples:</span>
+                <button type="button" class="btn-sample" onclick="loadSample('spam')">Sample Spam</button>
+                <button type="button" class="btn-sample" onclick="loadSample('ham')">Sample Ham (Legit)</button>
+                <button type="button" class="btn-sample" onclick="loadSample('urgent_ham')">Edge Case (Urgent Ham)</button>
+            </div>
+
+            <!-- Form -->
+            <form action="/" method="POST" class="email-form">
+                <label for="email_text" class="input-label">Paste Email / Message Content Below:</label>
+                <textarea id="email_text" name="email_text" rows="8" placeholder="Enter or paste email text here to classify..." required>{{ email_text or '' }}</textarea>
+                
+                <div class="action-row">
+                    <button type="submit" class="btn-submit">Classify Email</button>
+                    <button type="button" class="btn-clear" onclick="clearText()">Clear</button>
+                </div>
+            </form>
+
+            <!-- Result Section -->
+            {% if result %}
+            <div class="result-box {{ result.label.lower() }}">
+                <div class="result-header">
+                    <span class="result-tag">Classification Result:</span>
+                    <span class="badge {{ result.label.lower() }}">{{ result.label.upper() }}</span>
+                </div>
+                <div class="confidence-bar-wrapper">
+                    <div class="confidence-label">
+                        <span>Confidence Level:</span>
+                        <strong>{{ result.confidence }}%</strong>
+                    </div>
+                    <div class="progress-bar-bg">
+                        <div class="progress-bar-fill {{ result.label.lower() }}" style="width: {{ result.confidence }}%;"></div>
+                    </div>
+                </div>
+                <p class="result-details">
+                    Processed text length: {{ result.raw_len }} chars &bull; Cleaned tokens: {{ result.token_count }} words
+                </p>
+            </div>
+            {% endif %}
+        </main>
+
+        <footer class="footer">
+            <p><strong>Project Team:</strong> Krishna Singh, Javed Khan, Aman Kumar Singh, Arsh Aazam</p>
+            <p>B.Tech CSE &bull; Semester VII &bull; Academic Year 2026</p>
+        </footer>
+    </div>
+
+    <script>
+        const samples = {
+            spam: "CONGRATULATIONS! You have been selected as the grand prize winner of $1,000,000 cash! Claim your prize immediately by clicking here: http://claim-funds-now.com or call our urgent hotline. Limited time risk-free offer!",
+            ham: "Hi Krishna, please find attached the updated project milestone report for our sprint review meeting scheduled for tomorrow at 2:00 PM. Let me know if you have any questions or need revisions. Best regards, Operations Team.",
+            urgent_ham: "Urgent: Team, please submit your feedback on the quarterly budget report by EOD today so we can finalize the presentation for leadership tomorrow morning. Thanks, Finance Dept."
+        };
+
+        function loadSample(type) {
+            if (samples[type]) {
+                document.getElementById('email_text').value = samples[type];
+            }
+        }
+
+        function clearText() {
+            document.getElementById('email_text').value = '';
+            document.getElementById('email_text').focus();
+        }
+    </script>
+</body>
+</html>
